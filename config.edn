@@ -1,0 +1,4 @@
+{
+ :data-prefix "data"
+ :skeleton-file "data/skeleton.edn"
+}
