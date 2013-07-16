@@ -1,4 +1,5 @@
 {
  :data-prefix "data"
+ :view-prefix "views"
  :skeleton-file "data/skeleton.edn"
 }

@@ -1,6 +1,6 @@
-(ns resume.technologies)
+(ns resume.views)
 
-(defn view
+(defn technologies 
   [xs]
   (map #((let [{:keys [tech entries]} %]
            [:div {:class "technology"}

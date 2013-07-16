@@ -1,4 +1,4 @@
-(ns resume.experience)
+(ns resume.views)
 
 (defn- entry-helper
   [entry]
@@ -10,7 +10,7 @@
      (into [:p {:class "projects"}]
            (map #([:p {:class "project"} %]) projects))]))
 
-(defn view
+(defn experience 
   [xs]
   (map entry-helper xs))
 

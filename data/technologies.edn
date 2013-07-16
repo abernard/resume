@@ -9,6 +9,7 @@
   :entries ["FreeBSD" "Linux" "OSX" "Windows"]}
  {:tech "Build Tools"
   :entries ["lein" "sbt" "sh" "make"]}
- {:tech "Virtualization" ["Xen Server" "VMWare" "Heroku" "AWS"]}
-]
+ {:tech "Virtualization" 
+  :entries ["Xen Server" "VMWare" "Heroku" "AWS"]}
+ ]
 

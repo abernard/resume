@@ -8,6 +8,10 @@
   (str (.readFileSync fs filename)))
 
 (defn ^:export puts
-   [o]
-   (console/log (str o)))
+  [o]
+  (console/log (str o)))
+
+(defn ^:export invoke
+  [fn-str & args]
+  (apply (js/eval fn-str) args))
 

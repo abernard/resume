@@ -1,6 +1,6 @@
-(ns resume.contact)
+(ns resume.views)
 
-(def view
+(defn contact 
   [record]
   (let [{:keys [name email location phone github]} record]
     [:div {:class "contact"}

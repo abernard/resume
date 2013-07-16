@@ -1,41 +1,85 @@
 (ns resume.core
-  (:require [cljs.reader :as reader])
-  (:use [resume.util :only [slurp puts]]
-        [cljs.nodejs :only [require]]
-        [dommy.core :only [html]]))
+  (:require [cljs.reader :as reader]
+            [resume.cheerio :as q]
+            [hiccups.runtime :as edn])
+  (:use [resume.util :only [slurp puts invoke]]
+        [cljs.nodejs :only [require]]))
 
-(def config (reader/read-string (slurp "config.edn")))
-
-(defn- inject
-  [dom imap]
-  dom)
-
-(defn- get-ids
-  [skel]
-  ["contact" "objective" "skills" "technologies" "experience" "education"])
+(def mu (require "mustache"))
+(def express (require "express"))
 
 (defn- load-skeleton
+  "get empty skeleton as html"
   [filename]
-  (let [skel-str (slurp filename)] 
-    (into [] (apply concat (reader/read-string skel-str)))))
+  (let [str (slurp filename)
+        edn (into [] (apply concat (reader/read-string str)))
+        html (edn/render-html edn)]
+    (q/load html)))
 
-(defn- load-partials
-  [prefix ids]
-  )
+(defn- get-ids
+  "retrieve list of content ids from html skeleton"
+  [skeleton]
+  (-> skeleton
+    (q/select "div#resume")
+    .children
+    (.map (fn [i el] (.attr (q/select el) "id")))))
+
+(defn- process-view
+  "process edn->hiccup view transformer and render as html"
+  [id data view]
+  (let [filled (.render mu view (clj->js data))
+        hiccup (reader/read-string filled)]
+    (edn/render-html hiccup)))
+
+(defn- safe-load
+  [filename]
+  (try
+    (slurp filename)
+    (catch js/Object e "")))
+
+(defn- load-contents
+  "fill in skeleton with generated html partials"
+  [skeleton data-dir view-dir ]
+  (let [ids (get-ids skeleton)]
+    (doseq [id ids]
+      (let [text (safe-load (str data-dir "/" id ".edn")) 
+            data (reader/read-string text)
+            view (safe-load (str view-dir "/" id ".mu")) 
+            html (process-view id data view)]
+        (-> skeleton 
+          (q/select (str "div#" id))
+          (.replaceWith html))))        
+    (.html skeleton))) ; skeleton is now filled
 
 (def ^:private resume
-  (let [{:keys [skeleton-file data-prefix]} config
-        skeleton (load-skeleton skeleton-file) 
-        partials (load-partials data-prefix (get-ids skeleton))]
-    (inject skeleton partials)))
+  (let [config (reader/read-string (slurp "config.edn"))
+        {:keys [skeleton-file data-prefix view-prefix]} config
+        skeleton (load-skeleton skeleton-file)]
+    (load-contents skeleton data-prefix view-prefix)))
 
+(defn- routes
+  [app html]
+  (.get app "/" (fn [req res]
+                  (.setHeader res "Content-Type" "text/html")
+                  (.setHeader res "Content-Length" (.-length html))
+                  (.end res html)
+                  )))
 (defn- serve
   [html]
-  (puts html))
+  (let [app (express)
+        port 5000]
+    (doto app
+      (.use (.bodyParser express))
+      (.use (.cookieParser express))
+      (.use (.compress express))
+      (.use (.methodOverride express))
+      (.use (.-router app))
+      (routes html))
+    (.listen app port)))
 
 (defn -main
   [& args]
-  (serve (html resume))) 
+  (serve resume))
 
 (set! *main-cli-fn* -main)
 
