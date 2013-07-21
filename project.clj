@@ -7,9 +7,12 @@
                            [hiccups "0.2.0"]]
             :node-dependencies [[cheerio "0.12.0"]
                                 [express "3.3.4"]
-                                [mustache "0.7.2"]]
+                                [mustache "0.7.2"]
+                                [bootstrap "0.0.2"]
+                                [pdfkit "0.2.0"]
+                                [less-middleware "0.1.12"]]
             :profiles {:dev {:cljsbuild {:builds [{:id "development"
-                                                   :source-paths ["src/cljs" "views"]
+                                                   :source-paths ["src/cljs"]
                                                    :compiler {
                                                               :target :nodejs
                                                               :pretty-print true

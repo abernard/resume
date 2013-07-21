@@ -7,6 +7,8 @@
   :entries ["LevelDB" "BigCouch"]}
  {:tech "OS"
   :entries ["FreeBSD" "Linux" "OSX" "Windows"]}
+ {:tech "sh"
+  :entries ["git", "vim", "zsh", "bash"]} 
  {:tech "Build Tools"
   :entries ["lein" "sbt" "sh" "make"]}
  {:tech "Virtualization" 

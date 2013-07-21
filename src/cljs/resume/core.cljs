@@ -5,8 +5,26 @@
   (:use [resume.util :only [slurp puts invoke]]
         [cljs.nodejs :only [require]]))
 
+;;
+;; node.js requires
+;; 
+(def os (require "os"))
 (def mu (require "mustache"))
 (def express (require "express"))
+(defn less [opts] ((require "less-middleware") opts))
+(def path (require "path"))
+
+
+;;
+;; program configuration map
+;;
+(def config 
+  (let [base (reader/read-string (slurp "config.edn"))
+        {:keys [resource-prefix static-prefix]} base]
+    (into base {:data-path (str resource-prefix "/data")
+                :skel-path (str resource-prefix "/skel")
+                :view-path (str resource-prefix "/view")
+                :style-path (str resource-prefix "/less")})))
 
 (defn- load-skeleton
   "get empty skeleton as html"
@@ -19,10 +37,11 @@
 (defn- get-ids
   "retrieve list of content ids from html skeleton"
   [skeleton]
-  (-> skeleton
-    (q/select "div#resume")
-    .children
+  (-> skeleton 
+    (q/select "[id]")
     (.map (fn [i el] (.attr (q/select el) "id")))))
+
+;(.map (fn [i el] (.attr (q/select el) "id"))))
 
 (defn- process-view
   "process edn->hiccup view transformer and render as html"
@@ -32,48 +51,82 @@
     (edn/render-html hiccup)))
 
 (defn- safe-load
+  "loads contents of file as a string or empty string on failure"
   [filename]
   (try
     (slurp filename)
     (catch js/Object e "")))
 
+(defn- html5
+  "appends html5 header on an html document"
+  [html]
+  (str "<!doctype html>" html))
+
 (defn- load-contents
   "fill in skeleton with generated html partials"
-  [skeleton data-dir view-dir ]
-  (let [ids (get-ids skeleton)]
+  [skeleton]
+  (let [ids (get-ids skeleton)
+        {:keys [data-path view-path]} config]
     (doseq [id ids]
-      (let [text (safe-load (str data-dir "/" id ".edn")) 
+      (let [text (safe-load (str data-path "/" id ".edn")) 
             data (reader/read-string text)
-            view (safe-load (str view-dir "/" id ".mu")) 
+            view (safe-load (str view-path "/" id ".mu")) 
             html (process-view id data view)]
         (-> skeleton 
           (q/select (str "div#" id))
           (.replaceWith html))))        
-    (.html skeleton))) ; skeleton is now filled
+    (html5 (.html skeleton)))) ; skeleton is now filled
+
+(defn- get-path
+  [rel]
+  (.join path js/__dirname rel))
 
 (def ^:private resume
-  (let [config (reader/read-string (slurp "config.edn"))
-        {:keys [skeleton-file data-prefix view-prefix]} config
-        skeleton (load-skeleton skeleton-file)]
-    (load-contents skeleton data-prefix view-prefix)))
+  (let [{:keys [skeleton-file skel-path]} config
+        skeleton-qualified (str skel-path "/" skeleton-file)
+        skeleton (load-skeleton skeleton-qualified)]
+    (load-contents skeleton)))
 
 (defn- routes
   [app html]
-  (.get app "/" (fn [req res]
-                  (.setHeader res "Content-Type" "text/html")
-                  (.setHeader res "Content-Length" (.-length html))
-                  (.end res html)
-                  )))
+  (doto app
+    (.get "/" (fn [req res]
+                (.setHeader res "Content-Type" "text/html")
+                (.setHeader res "Content-Length" (.-length html))
+                (.end res html)
+                ))))
+
+; this hack gets around the 'static' keyword being used as
+; a function call.  clojurescript chokes with normal syntax.
+(defn- express-static
+  [path]
+  (invoke "resume.core.express.static" path))
+
+(defn- less-opts
+  [dest-dir]
+  (clj->js {
+            :src (:style-path config)
+            :paths [(str (:bootstrap-path config) "/less")]
+            :dest (str dest-dir "/css")
+            :prefix "/css"
+            :compress true
+            :debug true
+            }))
+
 (defn- serve
+  "configure express web server and serve html page"
   [html]
   (let [app (express)
-        port 5000]
+        port (:www-port config)
+        tmp-dir (str (.tmpdir os) "resume")
+        opts (less-opts tmp-dir)]
     (doto app
-      (.use (.bodyParser express))
-      (.use (.cookieParser express))
+      (.use (.favicon express))
       (.use (.compress express))
-      (.use (.methodOverride express))
+      (.use (.logger express))
       (.use (.-router app))
+      (.use (less opts))
+      (.use (express-static tmp-dir))
       (routes html))
     (.listen app port)))
 

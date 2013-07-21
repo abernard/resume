@@ -3,19 +3,19 @@
   :begin 2009
   :end 2013
   :projects ["Microcontrollers for data logging"]}
- {:entity "Harvey Mudd College"
-  :begin 2002
-  :end 2006 
-  :projects ["Control system for 3D Optical Coherence Microscope"]}
- {:entity "Auditude"
-  :begin 2002
-  :end 2006
-  :projects ["Linux radio tuning recorder for advertisement detection"]}
  {:entity "ISG"
   :begin 2007 
   :end 2009
   :projects ["Mobile device integration for inventory management software"
              "Database triggers, software hooks"
              "Custom ASP.NET form reporting and CMMS integration"]}
+ {:entity "Auditude"
+  :begin 2002
+  :end 2006
+  :projects ["Linux radio tuning recorder for advertisement detection"]}
+ {:entity "Harvey Mudd College"
+  :begin 2002
+  :end 2006 
+  :projects ["Control system for 3D Optical Coherence Microscope"]}
  ]
 

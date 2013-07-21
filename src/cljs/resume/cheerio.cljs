@@ -11,8 +11,6 @@
 ; this is necessarily hacky due to the way that
 ; cheerio is designed...
 (defn select
-  ([obj]
-   (js* "resume.cheerio.$(~{obj})"))
-  ([obj selector]
-   (js* "~{obj}(~{selector})")))
+  ([obj] (js* "resume.cheerio.$(~{obj})"))
+  ([obj selector] (js* "~{obj}(~{selector})")))
 

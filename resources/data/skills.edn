@@ -4,10 +4,10 @@
   "Developed with both SQL and noSQL.  Wrote high-performance (250K req/s) noSQL store on top of LevelDB in Scala and Akka.  Uses CQRS in API to separate commands from queries."}
  {:skill "Concurrency" 
   :description
-  "Designs systems with functional programming, immutable data, and good standards to allow system scalability.  Knows different concurrency paradigms: asynchronous callback, futures, actor model, message passing, threading."}
+  "Designs systems with functional programming, immutable values, and good standards to allow system scalability.  Knows different concurrency models: asynchronous callback, futures, actors, message passing, threading."}
  {:skill "Native UNIX Speaker"
   :description
-  "I have been running a UNIX as my primary development OS since 1998. Experienced in FreeBSD, Linux, and Solaris. BSDA Certification."}
+  "I have been running UNIX as my primary development OS since 1998. Experienced in FreeBSD, Linux, and Solaris. BSDA Certification."}
  {:skill "Testing"
   :description
   "Avid practictioner of Test Driven Development and unit testing.  Believes that tests augment the documentation process."}  

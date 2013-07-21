@@ -1,5 +1,8 @@
 {
- :data-prefix "data"
- :view-prefix "views"
- :skeleton-file "data/skeleton.edn"
+ :resource-prefix "resources"
+ :static-prefix "public"
+ :contrib-prefix "contrib"
+ :skeleton-file "skeleton.edn"
+ :bootstrap-path "contrib/bootstrap"
+ :www-port 5000
 }

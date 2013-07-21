@@ -1,0 +1,84 @@
+@import 'commaize.less';
+@import 'bootstrap.less';
+
+.container {
+  width: 960px;
+}
+
+.dev-borders() {
+  .box-sizing(border-box);
+  border-color: #ff0000;
+  border: 1px solid; 
+}
+
+.contact {
+  .makeRow();
+  .name-div {
+    .makeColumn(9);
+  }
+  .contact-info {
+    .makeColumn(3);
+    margin-top: 10px;
+    text-align: right;
+    .name {
+    }
+    .email {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.skill-entry {
+  .makeRow();
+  margin: 0;
+  padding: 0;
+  .skill {
+    text-align: right;
+    .makeColumn(2);
+    .dev-borders();
+  }
+  .skill-description {
+    .makeColumn(10);
+    .dev-borders();
+  }
+}
+
+.technology {
+  .makeRow();
+  margin: 0;
+  padding: 0;
+  .technology-key {
+    text-align: right;
+    .dev-borders();
+    .makeColumn(2);
+  }
+  .technology-entries {
+    .dev-borders();
+    .makeColumn(10);
+  }
+}
+
+.job {
+  .makeRow();
+  .job-key {
+    .makeColumn(4);
+    text-align: right;
+    .entity {
+      display: inline;
+      padding-right: 10px;
+    }
+    .timeframe {
+      display: inline;
+    }
+  }
+  .projects {
+    text-align: left;
+    .makeColumn(8);
+  }
+}
+
+@media print {
+  body {
+  } 
+}

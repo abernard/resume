@@ -1,0 +1,22 @@
+ul.tags {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+ul.tags li {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.tags li:after {
+  content: ", ";
+  color: #aaa;
+}
+
+ul.tags li:last-child:after {
+  content: "";
+}
+

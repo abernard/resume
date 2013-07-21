@@ -1,0 +1,18 @@
+[
+ [:html
+  [:head
+   [:meta {:charset "utf-8"}]
+   [:link {:href "//netdna.bootstrapcdn.com/bootswatch/2.3.2/flatly/bootstrap.min.css" :rel "stylesheet"}]
+   [:link {:href "css/style.css" :rel "stylesheet"}]
+   ]
+  [:body {:class "container"}
+   [:header [:div {:id "me"}]]
+   [:div {:id "skills"}] 
+   [:div {:id "technologies"}] 
+   [:div {:id "experience"}] 
+   [:div {:id "education"}]]
+  [:aside]
+  [:footer]]
+ ]
+
+
