@@ -2,20 +2,21 @@
  {:entity "Duramec"
   :begin 2009
   :end 2013
-  :projects ["Microcontrollers for data logging"]}
+  :projects ["Programmed asynchronous, high performance data store [Scala, Akka]"
+             "Managed team producing industrial computing prototypes"
+             "Designed hardware and software for multi-threaded microcontrollers [C]"]}
  {:entity "ISG"
   :begin 2007 
   :end 2009
-  :projects ["Mobile device integration for inventory management software"
-             "Database triggers, software hooks"
-             "Custom ASP.NET form reporting and CMMS integration"]}
+  :projects ["Mobile device integration for inventory management software [C#, ASP]"
+             "Custom software form reporting and enterprise system integration"]}
  {:entity "Auditude"
-  :begin 2002
+  :begin 2006
   :end 2006
-  :projects ["Linux radio tuning recorder for advertisement detection"]}
- {:entity "Harvey Mudd College"
+  :projects ["Linux radio tuner/recorder for nationwide ad detection system [C++]"]}
+ {:entity "<a href='http://www.hmc.edu'>Harvey Mudd College</a>"
   :begin 2002
   :end 2006 
-  :projects ["Control system for 3D Optical Coherence Microscope"]}
+  :projects ["Control system for <a href='http://proceedings.spiedigitallibrary.org/proceeding.aspx?articleid=1296441'>biological 3D optical coherence microscope</a> [C++]"
+             "Received degree: B.Sc. Physics, humanities concentration in Economics"]             }
  ]
-

@@ -1,9 +1,9 @@
 [:div {:class "technologies"}
- [:h3 "Technologies"]
+ [:h3 "Technological Expertise"]
 {{#.}}
-[:span {:class "technology"}
+[:div {:class "technology"}
  [:p {:class "technology-key"} "{{tech}}"]
- [:span {:class "technology-entries"}
+ [:div {:class "technology-entries"}
   [:ul {:class "tags"} {{#entries}}
   [:li "{{.}}"] 
  {{/entries}}

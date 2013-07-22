@@ -127,6 +127,7 @@
       (.use (.-router app))
       (.use (less opts))
       (.use (express-static tmp-dir))
+      (.use "/fonts" (express-static "./public/fonts"))
       (routes html))
     (.listen app port)))
 

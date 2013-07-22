@@ -1,31 +1,70 @@
 @import 'commaize.less';
 @import 'bootstrap.less';
+@import 'fonts.less';
+
+body {
+  font-family: 'Lato';
+}
+
+.hack {
+  margin: 0 0 0px;
+  color: rgba(0,0,0,0);
+}
 
 .container {
   width: 960px;
+  font-size: 120%;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.dev-borders() {
-  .box-sizing(border-box);
-  border-color: #ff0000;
-  border: 1px solid; 
+.major-style {
+  color: #2c3e50;
+  font-family: 'Montserrat';
+}
+
+.minor-style {
+  font-family: 'Lato';
+}
+
+.skills {
+  .makeRow();
+  display: block;
+  margin-top: 15px;
+}
+
+.objective {
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+h1, h3 {
+  .major-style();
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.key {
+  .major-style();
+  font-weight: bold;
+  text-align: right;
 }
 
 .contact {
   .makeRow();
   .name-div {
-    .makeColumn(9);
+    .makeColumn(8);
   }
   .contact-info {
-    .makeColumn(3);
-    margin-top: 10px;
+    .makeColumn(4);
+    .major-style();
+    p {
+      margin: 0 0 10px;
+    }
+    margin-top: 15px;
     text-align: right;
-    .name {
-    }
-    .email {
-      padding: 0;
-      margin: 0;
-    }
   }
 }
 
@@ -34,51 +73,59 @@
   margin: 0;
   padding: 0;
   .skill {
-    text-align: right;
-    .makeColumn(2);
-    .dev-borders();
+    .key();
+    .makeColumn(3);
   }
-  .skill-description {
-    .makeColumn(10);
-    .dev-borders();
+  .skill-description { 
+    .makeColumn(9);
+    margin-bottom: 15px;
   }
+}
+
+.technologies {
+  display: block;
+  margin-top: 15px;
 }
 
 .technology {
   .makeRow();
-  margin: 0;
-  padding: 0;
   .technology-key {
-    text-align: right;
-    .dev-borders();
-    .makeColumn(2);
+    .key();
+    .makeColumn(4);
+    margin-left: 0px;
   }
   .technology-entries {
-    .dev-borders();
-    .makeColumn(10);
+    .makeColumn(8);
   }
+}
+
+.experience {
+  margin-top: 18px;
 }
 
 .job {
   .makeRow();
+  font-size: 95%;
   .job-key {
     .makeColumn(4);
+    margin-left: 0px;
     text-align: right;
     .entity {
       display: inline;
-      padding-right: 10px;
+      padding-right: 15px;
+      .key();
     }
     .timeframe {
+      font-size: 90%;
       display: inline;
     }
   }
   .projects {
     text-align: left;
+    p {
+      margin: 0 0 8px;
+    }
     .makeColumn(8);
   }
 }
 
-@media print {
-  body {
-  } 
-}

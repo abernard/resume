@@ -1,16 +1,12 @@
 [
  {:tech "Languages"
-  :entries ["Scala" "Clojure" "C" "C++" "sh" "Node.js" "Ruby" "HTML" "CSS"]}
- {:tech "SQL"
-  :entries ["SQL Server" "PostgreSQL" "Oracle"]}
- {:tech "noSQL"
-  :entries ["LevelDB" "BigCouch"]}
+  :entries ["Scala" "Clojure" "Java" "C" "C++" "sh" "Node.js" "Ruby" "JavaScript" "HTML"]}
+ {:tech "Data Stores"
+  :entries ["SQL Server" "PostgreSQL" "Oracle" "LevelDB" "BigCouch"]}
  {:tech "OS"
   :entries ["FreeBSD" "Linux" "OSX" "Windows"]}
- {:tech "sh"
-  :entries ["git", "vim", "zsh", "bash"]} 
- {:tech "Build Tools"
-  :entries ["lein" "sbt" "sh" "make"]}
+ {:tech "Build Tools & Shell"
+  :entries ["lein" "sbt" "sh" "make" "git" "vim" "zsh" "bash"]}
  {:tech "Virtualization" 
   :entries ["Xen Server" "VMWare" "Heroku" "AWS"]}
  ]

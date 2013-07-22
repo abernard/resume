@@ -1,15 +1,21 @@
 [
- {:skill "Data Stores"
+ {:skill "Interdisciplinary"
+  :description "Accustomed to quantitative analysis due to physics background.  Adept at constructing models and experiments to test them.  Extensive mathematics and numerical simulation experience."}
+ {:skill "Focused"
+  :description "Project-oriented and committed to delivering quality artifacts.  Able to proceed on projects with minimal direction.  Comfortable providing consistent feedback and demonstrations of progress.  Familiar with agile techniques."}
+ {:skill "Communicative"
+  :description "Proactively discovers information required for project success.  Enjoys presenting material and experiences learned during a project."} 
+ {:skill "Knows Data Systems"
   :description
-  "Developed with both SQL and noSQL.  Wrote high-performance (250K req/s) noSQL store on top of LevelDB in Scala and Akka.  Uses CQRS in API to separate commands from queries."}
+  "Extensively developed with SQL, noSQL, and plain data formats.  Practiced in the dark and mysterious arts of data scrubbing, sanitization, and conversion from legacy systems.  Confident with Map-Reduce processing and is knowledgeable with issues attendant to such systems (caching, data locality, hierarchical reductions, indexing structure, redundancy)."}
  {:skill "Concurrency" 
   :description
-  "Designs systems with functional programming, immutable values, and good standards to allow system scalability.  Knows different concurrency models: asynchronous callback, futures, actors, message passing, threading."}
+  "Designs systems with functional programming, immutable values, simplicity, and clean standards to help with scalability.  Knows when and how to apply different concurrency models: asynchronous callback, futures, actors, STM, threading."}
  {:skill "Native UNIX Speaker"
   :description
-  "I have been running UNIX as my primary development OS since 1998. Experienced in FreeBSD, Linux, and Solaris. BSDA Certification."}
+  "I have consistently run a UNIX as my primary development OS since 1998. Experienced in FreeBSD, Linux, and Solaris.  <a href='http://www.bsdcertification.org/certification/certification/bsd-associate'>BSDA Certification.</a>"}
  {:skill "Testing"
   :description
-  "Avid practictioner of Test Driven Development and unit testing.  Believes that tests augment the documentation process."}  
+  "Avid practictioner of TDD and unit testing.  Believes tests are just executable documentation."}  
  ]
 
